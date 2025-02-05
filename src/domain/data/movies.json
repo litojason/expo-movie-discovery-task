@@ -1,0 +1,31 @@
+{
+  "movies": [
+    {
+      "id": 1,
+      "title": "Inception",
+      "description": "A skilled thief is given a chance at redemption if he can successfully plant an idea into someone's mind.",
+      "releaseYear": 2010,
+      "genre": "Sci-Fi",
+      "rating": 8.8,
+      "isFavorite": false
+    },
+    {
+      "id": 2,
+      "title": "The Dark Knight",
+      "description": "Batman faces off against the Joker, a criminal mastermind who seeks to create chaos in Gotham City.",
+      "releaseYear": 2008,
+      "genre": "Action",
+      "rating": 9.0,
+      "isFavorite": true
+    },
+    {
+      "id": 3,
+      "title": "Interstellar",
+      "description": "A team of astronauts travels through a wormhole in search of a new home for humanity.",
+      "releaseYear": 2014,
+      "genre": "Adventure",
+      "rating": 8.6,
+      "isFavorite": false
+    }
+  ]
+}
