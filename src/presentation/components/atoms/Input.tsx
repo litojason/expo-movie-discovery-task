@@ -1,5 +1,5 @@
-import { useTheme } from "@react-navigation/native";
 import { TextInput, TextInputProps } from "react-native";
+import { useTheme } from "@react-navigation/native";
 
 interface InputProps extends TextInputProps {}
 

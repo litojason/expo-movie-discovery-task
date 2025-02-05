@@ -1,23 +1,32 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { Movie, MOVIES } from "@/src/domain/entities/Movie";
+import {
+  getFavoriteIds,
+  setFavoriteIds,
+} from "@/src/infrastructure/storage/movieStorage";
+
+export const loadFavoriteIds = createAsyncThunk(
+  "movie/loadFavoriteIds",
+  async () => {
+    return await getFavoriteIds();
+  }
+);
 
 export interface MovieState {
   movies: Movie[];
-  favorites: Movie[];
+  favoriteIds: Movie["id"][];
 
   searchTitle: string;
   searchGenre: string;
-  searches: Movie[];
 }
 
 const initialState: MovieState = {
   movies: MOVIES,
-  favorites: [],
+  favoriteIds: [],
 
   searchTitle: "",
   searchGenre: "",
-  searches: [],
 };
 
 const movieSlice = createSlice({
@@ -31,6 +40,8 @@ const movieSlice = createSlice({
 
       state.movies[movieIndex].isFavorite =
         !state.movies[movieIndex].isFavorite;
+
+      setFavoriteIds(action.payload);
     },
 
     setSearchTitle: (state, action: PayloadAction<Movie["title"]>) => {
@@ -45,6 +56,16 @@ const movieSlice = createSlice({
       }
       state.searchGenre = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(loadFavoriteIds.fulfilled, (state, action) => {
+      state.favoriteIds = action.payload;
+
+      state.movies = state.movies.map((movie) => ({
+        ...movie,
+        isFavorite: action.payload.includes(movie.id),
+      }));
+    });
   },
 });
 

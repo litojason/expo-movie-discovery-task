@@ -1,6 +1,5 @@
 import { View } from "react-native";
 
-// import { useMainStackNavigation } from "@/src/presentation/navigation/MainStack";
 import { Icon, Text } from "../atoms";
 import { useMainStackNavigation } from "../../navigation/hooks/useMainStack";
 

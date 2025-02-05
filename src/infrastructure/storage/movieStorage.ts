@@ -12,13 +12,16 @@ export const getFavoriteIds = async (): Promise<Movie["id"][]> => {
   }
 };
 
-export const setFavoriteIds = async (movie: Movie) => {
+export const setFavoriteIds = async (id: Movie["id"]) => {
   try {
     const favoriteIds = await getFavoriteIds();
-    const favoriteIdIndex = favoriteIds.findIndex((id) => id === movie.id);
+
+    const favoriteIdIndex = favoriteIds.findIndex(
+      (favoriteId) => favoriteId === id
+    );
 
     if (favoriteIdIndex === -1) {
-      favoriteIds.push(movie.id);
+      favoriteIds.push(id);
     } else {
       favoriteIds.splice(favoriteIdIndex, 1);
     }

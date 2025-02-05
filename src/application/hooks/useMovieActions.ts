@@ -1,4 +1,4 @@
-import { movieActions } from "../reducers/movieReducer";
+import { loadFavoriteIds, movieActions } from "../reducers/movieReducer";
 import { useAppDispatch } from "./storeHooks";
 
 export const useMovieActions = () => {
@@ -12,9 +12,18 @@ export const useMovieActions = () => {
     dispatch(movieActions.setSearchGenre(genre));
   };
 
+  const getMoviesWithFavorite = () => {
+    dispatch(loadFavoriteIds());
+  };
+
   const updateFavorite = (id: number) => {
     dispatch(movieActions.setFavorite(id));
   };
 
-  return { updateSearchTitle, updateSearchGenre, updateFavorite };
+  return {
+    updateSearchTitle,
+    updateSearchGenre,
+    getMoviesWithFavorite,
+    updateFavorite,
+  };
 };
